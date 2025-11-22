@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
+import Header from "../components/Header";
 
 const AppLayout = () => {
 	return (
 		<>
 			<main className="min-h-screen container mx-auto">
 				{/* header */}
+				<Header />
 				{/* body */}
 				<Outlet />
 			</main>
