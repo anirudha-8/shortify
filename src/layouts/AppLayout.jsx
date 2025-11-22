@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 const AppLayout = () => {
 	return (
 		<>
-			<main className="min-h-screen container m-auto">
+			<main className="min-h-screen container mx-auto">
 				{/* header */}
 				{/* body */}
 				<Outlet />
