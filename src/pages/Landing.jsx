@@ -33,6 +33,10 @@ const Landing = () => {
 					Shorten!
 				</Button>
 			</form>
+			<img
+				src="/banner.jpeg" // replace with 2 in small screens
+				className="w-full my-11 md:px-11"
+			/>
 		</div>
 	);
 };
