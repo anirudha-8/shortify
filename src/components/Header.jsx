@@ -12,7 +12,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { Link2, LogOut } from "lucide-react";
 
 const Header = () => {
-	const user = true;
+	const user = false;
 	const navigate = useNavigate();
 	return (
 		<nav className="flex justify-between items-center py-4">
