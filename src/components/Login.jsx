@@ -10,6 +10,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { Error } from "./Error";
 
 const Login = () => {
 	return (
@@ -23,9 +24,11 @@ const Login = () => {
 			<CardContent className="space-y-2">
 				<div className="space-y-1">
 					<Input type="email" name="email" placeholder="Enter email" />
+					<Error message={"Invalid Email"} />
 				</div>
 				<div className="space-y-1">
 					<Input type="password" name="password" placeholder="Enter password" />
+					<Error message={"Invalid Password"} />
 				</div>
 			</CardContent>
 			<CardFooter>
