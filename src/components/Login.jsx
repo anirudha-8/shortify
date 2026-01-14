@@ -3,7 +3,6 @@ import { Button } from "./ui/button";
 
 import {
 	Card,
-	CardAction,
 	CardContent,
 	CardDescription,
 	CardFooter,
@@ -12,6 +11,8 @@ import {
 } from "@/components/ui/card";
 import { Error } from "./Error";
 import { BeatLoader } from "react-spinners";
+import * as Yup from "yup";
+import { useState } from "react";
 
 const Login = () => {
 	// handling input
@@ -24,6 +25,32 @@ const Login = () => {
 		setFormData((prevState) => ({ ...prevState, [name]: value }));
 	};
 
+	// handle input validations using "Yup"
+	const [errors, setErrors] = useState({});
+	const handleLogin = async () => {
+		setErrors([]);
+		try {
+			const schema = Yup.object().shape({
+				email: Yup.string()
+					.email("Invalid Email!")
+					.required("Email is required!"),
+				password: Yup.string()
+					.min(6, "Password must be at least 6 characters!")
+					.required("Password is required!"),
+			});
+
+			await schema.validate(formData, { abortEarly: false });
+		} catch (e) {
+			const newErrors = {};
+
+			e?.inner?.forEach((err) => {
+				newErrors[err.path] = err.message;
+			});
+
+			setErrors(newErrors);
+		}
+	};
+
 	return (
 		<Card>
 			<CardHeader>
@@ -31,6 +58,7 @@ const Login = () => {
 				<CardDescription>
 					to your account if you already have one
 				</CardDescription>
+				{/* {error && <Error message={error.message} />} */}
 			</CardHeader>
 			<CardContent className="space-y-2">
 				<div className="space-y-1">
@@ -40,7 +68,7 @@ const Login = () => {
 						placeholder="Enter email"
 						onChange={handleInputChange}
 					/>
-					<Error message={"Invalid Email"} />
+					{errors.email && <Error message={errors.email} />}
 				</div>
 				<div className="space-y-1">
 					<Input
@@ -49,11 +77,11 @@ const Login = () => {
 						placeholder="Enter password"
 						onChange={handleInputChange}
 					/>
-					<Error message={"Invalid Password"} />
+					{errors.password && <Error message={errors.password} />}
 				</div>
 			</CardContent>
 			<CardFooter>
-				<Button>
+				<Button onClick={handleLogin}>
 					{true ? <BeatLoader size={10} color="#36d7b7" /> : "Login"}
 				</Button>
 			</CardFooter>
