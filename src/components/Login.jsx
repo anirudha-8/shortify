@@ -13,6 +13,8 @@ import { Error } from "./Error";
 import { BeatLoader } from "react-spinners";
 import * as Yup from "yup";
 import { useState } from "react";
+import useFetch from "../hooks/useFetch";
+import { login } from "../db/apiAuth";
 
 const Login = () => {
 	// handling input
@@ -24,6 +26,9 @@ const Login = () => {
 		const { name, value } = e.target;
 		setFormData((prevState) => ({ ...prevState, [name]: value }));
 	};
+
+	// using custom hook
+	const { data, loading, error, fn: fnLogin } = useFetch(login, formData);
 
 	// handle input validations using "Yup"
 	const [errors, setErrors] = useState({});
@@ -40,6 +45,8 @@ const Login = () => {
 			});
 
 			await schema.validate(formData, { abortEarly: false });
+
+			await fnLogin();
 		} catch (e) {
 			const newErrors = {};
 
