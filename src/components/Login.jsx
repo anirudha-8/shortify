@@ -12,9 +12,10 @@ import {
 import { Error } from "./Error";
 import { BeatLoader } from "react-spinners";
 import * as Yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { login } from "../db/apiAuth";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Login = () => {
 	// handling input
@@ -29,6 +30,14 @@ const Login = () => {
 
 	// using custom hook
 	const { data, loading, error, fn: fnLogin } = useFetch(login, formData);
+	const navigate = useNavigate();
+	let [searchParams] = useSearchParams();
+	const longLink = searchParams.get("creatNew");
+	useEffect(() => {
+		if (error === null && data) {
+			navigate(`dashboard?${longLink ? `createNew=${longLink}` : ""}`);
+		}
+	}, [data, error]);
 
 	// handle input validations using "Yup"
 	const [errors, setErrors] = useState({});
