@@ -65,7 +65,7 @@ const Login = () => {
 				<CardDescription>
 					to your account if you already have one
 				</CardDescription>
-				{/* {error && <Error message={error.message} />} */}
+				{error && <Error message={error.message} />}
 			</CardHeader>
 			<CardContent className="space-y-2">
 				<div className="space-y-1">
@@ -89,7 +89,7 @@ const Login = () => {
 			</CardContent>
 			<CardFooter>
 				<Button onClick={handleLogin}>
-					{true ? <BeatLoader size={10} color="#36d7b7" /> : "Login"}
+					{loading ? <BeatLoader size={10} color="#36d7b7" /> : "Login"}
 				</Button>
 			</CardFooter>
 		</Card>
