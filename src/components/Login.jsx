@@ -16,8 +16,11 @@ import { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { login } from "../db/apiAuth";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { UrlState } from "../context";
 
 const Login = () => {
+	const { fetchUser } = UrlState();
+
 	// handling input
 	const [formData, setFormData] = useState({
 		email: "",
@@ -36,6 +39,7 @@ const Login = () => {
 	useEffect(() => {
 		console.log(data);
 		if (error === null && data) {
+			fetchUser();
 			navigate(`dashboard?${longLink ? `createNew=${longLink}` : ""}`);
 		}
 	}, [data, error]);
