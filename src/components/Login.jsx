@@ -32,8 +32,9 @@ const Login = () => {
 	const { data, loading, error, fn: fnLogin } = useFetch(login, formData);
 	const navigate = useNavigate();
 	let [searchParams] = useSearchParams();
-	const longLink = searchParams.get("creatNew");
+	const longLink = searchParams.get("createNew");
 	useEffect(() => {
+		console.log(data);
 		if (error === null && data) {
 			navigate(`dashboard?${longLink ? `createNew=${longLink}` : ""}`);
 		}
