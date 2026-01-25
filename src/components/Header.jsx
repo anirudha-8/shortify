@@ -10,9 +10,10 @@ import {
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { Link2, LogOut } from "lucide-react";
+import { UrlState } from "../context";
 
 const Header = () => {
-	const user = false;
+	const { user, fetchUser } = UrlState();
 	const navigate = useNavigate();
 	return (
 		<nav className="flex justify-between items-center py-4">
@@ -26,12 +27,15 @@ const Header = () => {
 					<DropdownMenu className="outline-0 cursor-pointer">
 						<DropdownMenuTrigger className="rounded-full overflow-hidden">
 							<Avatar>
-								<AvatarImage src="https://github.com/shadcn.png" />
+								<AvatarImage
+									src={user?.user_metadata?.profile_pic}
+									className="object-contain"
+								/>
 								<AvatarFallback>AB</AvatarFallback>
 							</Avatar>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent>
-							<DropdownMenuLabel>Anya</DropdownMenuLabel>
+							<DropdownMenuLabel>{user?.user_metadata?.name}</DropdownMenuLabel>
 							<DropdownMenuSeparator />
 							<DropdownMenuItem>
 								<Link2 className="w-4 h-4"></Link2>
