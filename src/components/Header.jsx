@@ -29,10 +29,15 @@ const Header = () => {
 				</Link>
 				<div>
 					{!user ? (
-						<Button onClick={() => navigate("/auth")}>Login</Button>
+						<Button
+							className="cursor-pointer"
+							onClick={() => navigate("/auth")}
+						>
+							Login
+						</Button>
 					) : (
-						<DropdownMenu className="outline-0 cursor-pointer">
-							<DropdownMenuTrigger className="rounded-full overflow-hidden">
+						<DropdownMenu className="outline-0">
+							<DropdownMenuTrigger className="rounded-full overflow-hidden cursor-pointer">
 								<Avatar>
 									<AvatarImage
 										src={user?.user_metadata?.profile_pic}
@@ -41,28 +46,25 @@ const Header = () => {
 									<AvatarFallback>AB</AvatarFallback>
 								</Avatar>
 							</DropdownMenuTrigger>
-							<DropdownMenuContent>
+							<DropdownMenuContent className="cursor-pointer">
 								<DropdownMenuLabel>
 									{user?.user_metadata?.name}
 								</DropdownMenuLabel>
 								<DropdownMenuSeparator />
-								<DropdownMenuItem>
+								<DropdownMenuItem className="cursor-pointer">
 									<Link2 className="w-4 h-4"></Link2>
 									My Link
 								</DropdownMenuItem>
-								<DropdownMenuItem>
-									<LogOut className="text-red-400 w-4 h-4"></LogOut>
-									<span
-										className="text-red-400"
-										onClick={() => {
-											fnLogOut().then(() => {
-												fetchUser();
-												navigate("/");
-											});
-										}}
-									>
-										LogOut
-									</span>
+								<DropdownMenuItem
+									className="cursor-pointer text-red-400"
+									onClick={async () => {
+										await fnLogOut();
+										fetchUser();
+										navigate("/");
+									}}
+								>
+									<LogOut className="w-4 h-4"></LogOut>
+									LogOut
 								</DropdownMenuItem>
 							</DropdownMenuContent>
 						</DropdownMenu>
