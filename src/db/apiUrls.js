@@ -1,8 +1,8 @@
-import supabase from "supabase";
+import supabase from "./supabase";
 
 export async function getUrls(user_id) {
 	let { data, error } = await supabase
-		.from("clicks")
+		.from("urls")
 		.select("*")
 		.eq("user_id", user_id);
 
