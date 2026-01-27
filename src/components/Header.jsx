@@ -52,8 +52,10 @@ const Header = () => {
 								</DropdownMenuLabel>
 								<DropdownMenuSeparator />
 								<DropdownMenuItem className="cursor-pointer">
-									<Link2 className="w-4 h-4"></Link2>
-									My Link
+									<Link to="/dashboard" className="flex gap-2">
+										<Link2 className="w-4 h-4"></Link2>
+										My Link
+									</Link>
 								</DropdownMenuItem>
 								<DropdownMenuItem
 									className="cursor-pointer text-red-400"
