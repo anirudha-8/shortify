@@ -8,7 +8,7 @@ export async function getClicksForUrls(urlIds) {
 
 	if (error) {
 		console.error(error.message);
-		return null;
+		throw new Error("Unable to load clicks!");
 	}
 	return data;
 }
