@@ -91,7 +91,7 @@ const Dashboard = () => {
 			{errorUrls && <Error message={errorUrls.message} />}
 			{errorClicks && <Error message={errorClicks.message} />}
 			{(filteredUrls || []).map((url, i) => {
-				return url.title;
+				return <LinkCard key={i} url={url} fetchUrls={fnUrls} />;
 			})}
 		</div>
 	);
