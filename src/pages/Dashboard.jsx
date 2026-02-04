@@ -5,7 +5,6 @@ import {
 	CardTitle,
 	CardContent,
 } from "../components/ui/card";
-import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { useEffect, useState } from "react";
 import { Filter } from "lucide-react";
@@ -15,6 +14,7 @@ import useFetch from "../hooks/useFetch.js";
 import { getUrls } from "../db/apiUrls.js";
 import { getClicksForUrls } from "../db/apiClicks.js";
 import LinkCard from "../components/LinkCard.jsx";
+import CreateLink from "../components/CreateLink.jsx";
 
 const Dashboard = () => {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -76,7 +76,7 @@ const Dashboard = () => {
 
 			<div className="flex justify-between">
 				<h1 className="text-4xl font-extrabold">My Links</h1>
-				<Button>Create Link</Button>
+				<CreateLink />
 			</div>
 
 			<div className="relative">
