@@ -6,20 +6,29 @@ import { deleteUrl } from "../db/apiUrls";
 import { BeatLoader } from "react-spinners";
 
 const LinkCard = ({ url, fetchUrls }) => {
-	const downloadImage = () => {
+	const downloadImage = async () => {
 		const imageUrl = url?.qr;
 		const fileName = url?.title;
 
-		const anchor = document.createElement("a");
-		anchor.href = imageUrl;
-		anchor.download = fileName;
+		try {
+			const response = await fetch(imageUrl);
+			const blob = await response.blob();
+			const blobUrl = URL.createObjectURL(blob);
 
-		document.body.appendChild(anchor);
+			const anchor = document.createElement("a");
+			anchor.href = blobUrl;
+			anchor.download = `${fileName}.png`;
 
-		// to simulate download
-		anchor.click();
+			document.body.appendChild(anchor);
 
-		document.body.removeChild(anchor);
+			// to simulate download
+			anchor.click();
+
+			document.body.removeChild(anchor);
+			URL.revokeObjectURL(blobUrl);
+		} catch (error) {
+			console.error("Download failed:", error);
+		}
 	};
 
 	const { loading: loadingDelete, fn: fnDelete } = useFetch(deleteUrl, url?.id);
