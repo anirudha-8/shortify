@@ -66,3 +66,18 @@ export async function createUrl(
 
 	return data;
 }
+
+export async function getLongUrl(id) {
+	const { data, error } = await supabase
+		.from("urls")
+		.select("id", "original_url")
+		.or(`short_url.eq.${id}, custom_url.eq.${id}`)
+		.single();
+
+	if (error) {
+		console.error(error.message);
+		throw new Error("Error fetching short link!");
+	}
+
+	return data;
+}
