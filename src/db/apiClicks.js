@@ -1,6 +1,20 @@
 import { UAParser } from "ua-parser-js";
 import supabase from "./supabase";
 
+export async function getClicksForUrl(url_id) {
+	const { data, error } = await supabase
+		.from("clicks")
+		.select("*")
+		.eq("url_id", url_id);
+
+	if (error) {
+		console.error(error);
+		throw new Error("Unable to load stats!");
+	}
+
+	return data;
+}
+
 export async function getClicksForUrls(urlIds) {
 	console.log("Fetching clicks for URL IDs:", urlIds);
 
