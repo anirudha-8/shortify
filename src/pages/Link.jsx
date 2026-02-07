@@ -135,7 +135,7 @@ const Link = () => {
 					<img
 						src={url?.qr}
 						alt="QR Code Image"
-						className="h-48 self-center sm:self-start ring ring-blue-500 p-1 object-contain"
+						className="h-64 self-center sm:self-start ring ring-blue-500 p-1 object-contain"
 					/>
 				</div>
 
