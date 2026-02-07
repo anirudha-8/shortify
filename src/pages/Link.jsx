@@ -13,6 +13,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "../components/ui/card";
+import LocationStats from "../components/LocationStats";
 
 const Link = () => {
 	const downloadImage = async () => {
@@ -152,7 +153,7 @@ const Link = () => {
 							</Card>
 
 							<CardTitle>Location Data</CardTitle>
-							{/* <LocationStats stats={stats} /> */}
+							<LocationStats stats={stats} />
 
 							<CardTitle>Device Info</CardTitle>
 							{/* <DeviceStats stats={stats} /> */}
