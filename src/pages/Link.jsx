@@ -7,6 +7,12 @@ import { BarLoader, BeatLoader } from "react-spinners";
 import { useEffect } from "react";
 import { Copy, Download, LinkIcon, Trash } from "lucide-react";
 import { Button } from "../components/ui/button";
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardTitle,
+} from "../components/ui/card";
 
 const Link = () => {
 	const downloadImage = async () => {
@@ -132,7 +138,33 @@ const Link = () => {
 				</div>
 
 				{/* Stats Details */}
-				<div className="sm:w-3/5">Hello</div>
+				<Card className="sm:w-3/5">
+					<CardHeader>
+						<CardTitle className={"text-4xl font-extrabold"}>Stats</CardTitle>
+					</CardHeader>
+					{stats && stats.length ? (
+						<CardContent className={"flex flex-col gap-6"}>
+							<Card>
+								<CardHeader>
+									<CardTitle>Total Clicks</CardTitle>
+									<CardContent>{stats?.length}</CardContent>
+								</CardHeader>
+							</Card>
+
+							<CardTitle>Location Data</CardTitle>
+							{/* <LocationStats stats={stats} /> */}
+
+							<CardTitle>Device Info</CardTitle>
+							{/* <DeviceStats stats={stats} /> */}
+						</CardContent>
+					) : (
+						<CardContent>
+							{loadingStats === false
+								? "No statistics yet!"
+								: "Loading statistics..."}
+						</CardContent>
+					)}
+				</Card>
 			</div>
 		</>
 	);
